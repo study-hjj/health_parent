@@ -1,0 +1,14 @@
+com\health\util\Result.class
+com\health\entity\Member.class
+com\health\entity\Order.class
+com\health\entity\CheckGroup.class
+com\health\entity\Setmeal.class
+com\health\entity\Menu.class
+com\health\entity\OrderSetting.class
+com\health\entity\Permission.class
+com\health\constant\MessageConstant.class
+com\health\entity\User.class
+com\health\util\QueryPageBean.class
+com\health\entity\CheckItem.class
+com\health\entity\Role.class
+com\health\util\PageResult.class
