@@ -4,6 +4,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.health.constant.MessageConstant;
 import com.health.entity.CheckItem;
 import com.health.service.CheckItemService;
+import com.health.util.PageResult;
+import com.health.util.QueryPageBean;
 import com.health.util.Result;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +27,10 @@ public class CheckItemController {
             e.printStackTrace();
             return new Result(false, MessageConstant.ADD_CHECKITEM_FAIL);
         }
+    }
+    //分页查询
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
+        return checkItemService.findPage(queryPageBean);
     }
 }

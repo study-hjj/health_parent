@@ -7,4 +7,11 @@
    values
    (#{code},#{name},#{sex},#{age},#{price},#{type},#{remark},#{attention})
 </insert>
+   <!--根据条件查询-->
+   <select id="findByCondition" parameterType="string" resultType="com.health.entity.CheckItem">
+      select * from t_checkitem
+      <if test="value != null and value.length > 0">
+         where code = #{value} or name = #{value}
+      </if>
+   </select>
 </mapper>

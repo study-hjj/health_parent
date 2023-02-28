@@ -225,6 +225,8 @@
             },
             //钩子函数，VUE对象初始化完成后自动执行
             created() {
+                //调用分页查询方法完成分页查询
+                this.findPage();
             },
             methods: {
                 //编辑
@@ -259,6 +261,18 @@
                 },
                 //分页查询
                 findPage() {
+                    var param = {
+                        currentPage:this.pagination.currentPage,
+                        pageSize:this.pagination.pageSize,
+                        queryString:this.pagination.queryString
+                    };
+
+                    //发送ajax请求，进行分页查询
+                    axios.post("/checkitem/findPage.do",param).then((res) => {
+                        alert("mmm");
+                        this.pagination.total = res.data.total;
+                        this.dataList = res.data.rows;
+                    });
                 },
                 // 重置表单
                 resetForm() {
@@ -266,8 +280,9 @@
                 },
                 // 弹出添加窗口
                 handleCreate() {
-                    this.dialogFormVisible = true;
                     this.resetForm();
+                    //将添加窗口展示出来
+                    this.dialogFormVisible = true;
                 },
                 // 弹出编辑窗口
                 handleUpdate(row) {
