@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/checkitem")
 public class CheckItemController {
+    //到zookeeper中心去查找服务
     @Reference
     private CheckItemService checkItemService;
     //新增
