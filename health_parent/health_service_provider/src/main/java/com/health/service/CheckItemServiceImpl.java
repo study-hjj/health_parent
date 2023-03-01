@@ -30,4 +30,20 @@ public class CheckItemServiceImpl implements CheckItemService{
         Page<CheckItem> page = checkItemDao.findByCondition(queryString);
         return new PageResult(page.getTotal(),page.getResult());
     }
+
+    @Override
+    public void delete(Integer id) {
+        checkItemDao.delete(id);
+    }
+
+    @Override
+    public CheckItem findById(Integer id) {
+        CheckItem checkItem = checkItemDao.findById(id);
+        return checkItem;
+    }
+
+    @Override
+    public void edit(CheckItem checkItem) {
+        checkItemDao.edit(checkItem);
+    }
 }
