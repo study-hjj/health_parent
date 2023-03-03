@@ -20,7 +20,10 @@
    <select id="findById" parameterType="integer" resultType="com.health.entity.CheckItem">
       select * from t_checkitem where id = #{id}
    </select>
-   <update id="edit" parameterType="com.health.entity.CheckItem">
+    <select id="findAll" resultType="com.health.entity.CheckItem">
+        select * from t_checkitem;
+    </select>
+    <update id="edit" parameterType="com.health.entity.CheckItem">
       update t_checkitem
       <set>
           <if test="code != null">

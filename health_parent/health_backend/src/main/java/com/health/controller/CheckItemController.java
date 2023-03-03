@@ -98,4 +98,21 @@ public class CheckItemController {
             return new Result(false, MessageConstant.EDIT_CHECKITEM_FAIL);
         }
     }
+    /**
+     * @Description: 查询所有检查项信息
+     * @author: hjj
+     * @date: 2023/3/3
+     * @param
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/findAll")
+    public Result findAll(){
+        try{
+            CheckItem[] checkItems = checkItemService.findAll();//发送请求
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItems);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
+    }
 }
