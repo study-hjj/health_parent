@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.health.dao.CheckGroupDao">
+    <resultMap id="baseResultMap" type="com.health.entity.CheckGroup">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="code" property="code"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+    </resultMap>
+    <insert id="add" parameterType="com.health.entity.CheckGroup">
+        <!--通过mybatis框架提供的selectKey标签获得自增产生的id值，其中keyProperty中的值需的和
+        CheckGroup数据库中的值保持一致，order中的值是在插入语句完成后再获取idde值!-->
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into t_checkgroup (code,name,helpCode,sex,remark,attention)
+        values
+        (#{code},#{name},#{helpCode},#{sex},#{remark},#{attention})
+    </insert>
+    <insert id="addCheckGroupCheckItem">
+        insert into t_checkgroup_checkitem (checkgroup_id,checkitem_id)
+        values
+        (#{checkgroup_id},#{checkitem_id})
+    </insert>
+    <select id="findPage" parameterType="string" resultType="com.health.entity.CheckGroup">
+        select * from t_checkgroup
+        <if test="value != null and value.length > 0">
+            where code = #{value} or name = #{value}
+        </if>
+    </select>
+</mapper>
