@@ -5,10 +5,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.health.dao.CheckGroupDao;
 import com.health.entity.CheckGroup;
-import com.health.entity.CheckItem;
 import com.health.util.PageResult;
 import com.health.util.QueryPageBean;
-import com.sun.tools.corba.se.idl.toJavaPortable.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +38,40 @@ public class CheckGroupServiceImpl implements CheckGroupService{
         PageHelper.startPage(currentPage,pageSize);
         Page<CheckGroup> page = checkGroupDao.findPage(queryString);
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public void delete(Integer id) {
+        //首先需要根据id查询出有没有和该检查组关联的检查项
+        Integer count = checkGroupDao.findByCheckGroupId(id);
+        if (count > 0){
+            //如果关联表中有关联检查项，需要先删除关联表中的信息
+            checkGroupDao.deleteCheckGroupAndCheckItem(id);
+        }
+        //删除检查组
+        checkGroupDao.delete(id);
+    }
+
+    @Override
+    public CheckGroup findById(Integer id) {
+        return checkGroupDao.findById(id);
+    }
+
+    @Override
+    public Integer[] findCheckItemIdsByCheckGroupId(Integer id) {
+        return checkGroupDao.findCheckItemIdsByCheckGroupId(id);
+    }
+
+    @Override
+    public void edit(CheckGroup checkGroup, Integer[] ids) {
+        checkGroupDao.edit(checkGroup);
+        //清理检查组和检查项的关系
+        checkGroupDao.deleteCheckGroupAndCheckItem(checkGroup.getId());
+        if (ids != null && ids.length > 0){
+            for (Integer id : ids){
+                checkGroupDao.addCheckGroupCheckItem(checkGroup.getId(),id);
+            }
+        }
     }
 
 }

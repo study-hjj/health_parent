@@ -26,10 +26,49 @@
         values
         (#{checkgroup_id},#{checkitem_id})
     </insert>
+    <update id="edit">
+        update t_checkgroup
+        <set>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="helpCode != null">
+                helpCode = #{helpCode},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete">
+        delete from t_checkgroup where id=#{id}
+    </delete>
+    <delete id="deleteCheckGroupAndCheckItem">
+        delete from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId}
+    </delete>
     <select id="findPage" parameterType="string" resultType="com.health.entity.CheckGroup">
         select * from t_checkgroup
         <if test="value != null and value.length > 0">
             where code = #{value} or name = #{value}
         </if>
+    </select>
+    <select id="findByCheckGroupId" resultType="java.lang.Integer">
+        select count(*) from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId}
+    </select>
+    <select id="findById" resultType="com.health.entity.CheckGroup">
+        select * from t_checkgroup where id=#{id}
+    </select>
+    <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
+        select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId}
     </select>
 </mapper>
