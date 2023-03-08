@@ -71,4 +71,7 @@
     <select id="findCheckItemIdsByCheckGroupId" resultType="java.lang.Integer">
         select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId}
     </select>
+    <select id="findAll" resultType="com.health.entity.CheckGroup">
+        select * from t_checkgroup
+    </select>
 </mapper>

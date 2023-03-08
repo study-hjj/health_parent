@@ -97,6 +97,23 @@ public class CheckGroupController {
         }
     }
     /**
+     * @Description: 查询所有检查组
+     * @author: hjj
+     * @date: 2023/3/8
+     * @param
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/findAll")
+    public Result findAll(){
+        try {
+            CheckGroup[] checkGroup = checkGroupService.findAll();
+            return new Result(true,MessageConstant.QUERY_CHECKGROUP_SUCCESS,checkGroup);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+    /**
      * @Description: 编辑检查组
      * @author: hjj
      * @date: 2023/3/5

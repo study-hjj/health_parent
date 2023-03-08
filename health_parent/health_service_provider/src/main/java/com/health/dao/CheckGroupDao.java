@@ -23,4 +23,5 @@ public interface CheckGroupDao {
 
     void edit(CheckGroup checkGroup);
 
+    CheckGroup[] findAll();
 }
