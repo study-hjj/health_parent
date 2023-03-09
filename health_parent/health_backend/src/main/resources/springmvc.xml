@@ -45,6 +45,6 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
-    <!--<import resource="classpath:spring-redis.xml"></import>
-    <import resource="classpath:spring-security.xml"></import>-->
+    <import resource="classpath:spring-redis.xml"></import>
+    <!--<import resource="classpath:spring-security.xml"></import>-->
 </beans>
