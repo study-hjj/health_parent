@@ -16,7 +16,11 @@ import com.qiniu.util.Auth;
 public class QiniuUtils {
     public  static String accessKey = "uv-t9KE3vq8vCpghtHrYG5FnbJmDJF6928cMNWTH";
     public  static String secretKey = "KmGNL3ZxpHbUj-uh1eMEUV_uYuy5sbHyOH4dp2xM";
-    public  static String bucket = "health_hjj";
+    public  static String bucket = "health-hjj";
+    //华东：–：z0–zone0
+    //华北：–：z1–zone1
+    //华南：–：z2–zone2
+
 
     public static void upload2Qiniu(String filePath,String fileName){
         //构造一个带指定Zone对象的配置类
@@ -41,7 +45,8 @@ public class QiniuUtils {
     //上传文件
     public static void upload2Qiniu(byte[] bytes, String fileName){
         //构造一个带指定Zone对象的配置类
-        Configuration cfg = new Configuration(Zone.zone0());
+        //我这里创建的是华南
+        Configuration cfg = new Configuration(Zone.zone2());
         //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
 
