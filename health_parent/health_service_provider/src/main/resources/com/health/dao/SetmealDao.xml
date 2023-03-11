@@ -27,4 +27,10 @@
         values
         (#{setmeal_id},#{checkgroup_id})
     </insert>
+    <select id="findPage" resultType="com.health.entity.Setmeal">
+        select * from t_setmeal
+        <if test="value != null and value.length >0">
+            where code=#{code} or name=#{name} or helpCode=#{helpCode}
+        </if>
+    </select>
 </mapper>

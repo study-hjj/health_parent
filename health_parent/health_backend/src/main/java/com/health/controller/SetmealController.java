@@ -5,7 +5,9 @@ import com.health.constant.MessageConstant;
 import com.health.constant.RedisConstant;
 import com.health.entity.Setmeal;
 import com.health.service.SetmealService;
+import com.health.util.PageResult;
 import com.health.util.QiniuUtils;
+import com.health.util.QueryPageBean;
 import com.health.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,6 +45,13 @@ public class SetmealController {
             return new Result(false,MessageConstant.ADD_SETMEAL_FAIL);
         }
     }
+    /**
+     * @Description: 将上传的图片保存在七牛云服务和redis中
+     * @author: hjj
+     * @date: 2023/3/11
+     * @param imgFile
+     * @return: com.health.util.Result
+     */
     @RequestMapping("/upload")
     public Result upload(@RequestParam("imgFile")MultipartFile imgFile){
         //获取原始文件名
@@ -61,5 +70,16 @@ public class SetmealController {
             e.printStackTrace();
             return new Result(false,MessageConstant.PIC_UPLOAD_FAIL);
         }
+    }
+    /**
+     * @Description: 分页查询
+     * @author: hjj
+     * @date: 2023/3/11
+     * @param queryPageBean
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
+        return setmealService.findPage(queryPageBean);
     }
 }
