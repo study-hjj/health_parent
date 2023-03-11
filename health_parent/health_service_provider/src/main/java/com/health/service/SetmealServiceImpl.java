@@ -42,4 +42,38 @@ public class SetmealServiceImpl implements SetmealService{
         Page<Setmeal> page = setmealDao.findPage(queryString);
         return new PageResult(page.getTotal(),page.getResult());
     }
+
+    @Override
+    public Setmeal findById(Integer id) {
+        Setmeal setmeal = setmealDao.findById(id);
+        return setmeal;
+    }
+
+    @Override
+    public void edit(Integer[] ids, Setmeal setmeal) {
+        setmealDao.edit(setmeal);
+        //清理检查组和检查项的关系
+        setmealDao.deleteCheckGroupAndCheckItem(setmeal.getId());
+        if (ids != null && ids.length > 0){
+            for (Integer id : ids){
+                setmealDao.addSetmealAndCheckgroup(setmeal.getId(),id);
+            }
+        }
+    }
+
+    @Override
+    public void delete(Integer id) {
+        //首先需要根据id查询出有没有和该套餐关联的检查组
+        Integer count = setmealDao.findBySetmealId(id);
+        if (count > 0){
+            //如果关联表中有关联检查项，需要先删除关联表中的信息
+            setmealDao.deleteSetmealAndCheckGroup(id);
+        }
+        setmealDao.delete(id);
+    }
+
+    @Override
+    public Integer[] findCheckgroupIdsBySetmealId(Integer id) {
+        return setmealDao.findCheckgroupIdsBySetmealId(id);
+    }
 }

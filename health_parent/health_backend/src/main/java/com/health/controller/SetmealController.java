@@ -82,4 +82,73 @@ public class SetmealController {
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
         return setmealService.findPage(queryPageBean);
     }
+    /**
+     * @Description: 根据id查询套餐
+     * @author: hjj
+     * @date: 2023/3/11
+     * @param id
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/findById")
+    public Result findById(@RequestParam("id") Integer id){
+        try {
+            Setmeal setmeal = setmealService.findById(id);
+            return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setmeal);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.QUERY_SETMEAL_FAIL);
+        }
+    }
+    /**
+     * @Description: 编辑套餐
+     * @author: hjj
+     * @date: 2023/3/11
+     * @param ids
+     * @param setmeal
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/edit")
+    public Result edit(@RequestParam("checkitemIds") Integer[] ids,@RequestBody Setmeal setmeal){
+        try {
+            setmealService.edit(ids,setmeal);
+            return new Result(true,MessageConstant.EDIT_SETMEAL_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.EDIT_SETMEAL_FAIL);
+        }
+    }
+    /**
+     * @Description: 删除套餐
+     * @author: hjj
+     * @date: 2023/3/11
+     * @param id
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/delete")
+    public Result delete(@RequestParam("id") Integer id){
+        try {
+            setmealService.delete(id);
+            return new Result(true,MessageConstant.DELETE_SETMEAL_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.DELETE_SETMEAL_FAIL);
+        }
+    }
+    /**
+     * @Description: 根据套餐id查询检查组
+     * @author: hjj
+     * @date: 2023/3/11
+     * @param id
+     * @return: com.health.util.Result
+     */
+    @RequestMapping("/findCheckgroupIdsBySetmealId")
+    public Result findCheckgroupIdsBySetmealId(@RequestParam("setmealId") Integer id){
+        try {
+            Integer[] checkgroupIds = setmealService.findCheckgroupIdsBySetmealId(id);
+            return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,checkgroupIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.QUERY_SETMEAL_FAIL);
+        }
+    }
 }
