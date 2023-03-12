@@ -84,7 +84,7 @@
                                         <!-- 当前月 -->
                                         <div class="everyday" v-if="dayobject.day.getMonth()+1 == currentMonth">
                                             <span class="datenumber">{{ dayobject.day.getDate()}}</span>
-                                            
+
 											<template>
                                                 <template v-for="obj in leftobj">
                                                     <template v-if="obj.date == dayobject.day.getDate()">
@@ -105,7 +105,7 @@
                                                 </template>
                                                 <button v-if="dayobject.day > today" @click="handleOrderSet(dayobject.day)" class="orderbtn">设置</button>
                                             </template>
-											
+
                                         </div>
                                     </template>
                                 </li>
@@ -251,15 +251,15 @@
                             dayobject.index = index++;
                         this.days.push(dayobject);
                     }
-                    
-                    /*this.leftobj = [
+
+                    this.leftobj = [
                         { date: 1, number: 120, reservations: 1 },
                         { date: 2, number: 120, reservations: 119 },
                         { date: 3, number: 120, reservations: 1 },
                         { date: 4, number: 120, reservations: 120 },
                         { date: 6, number: 120, reservations: 1 },
                         { date: 8, number: 120, reservations: 1 }
-                    ];*/
+                    ];
 
                     //发送ajax请求，根据年月查询对应的预约设置数据，赋值给leftobj对象，用于展示
                     axios.get("/ordersetting/getOrderSettingByMonth.do?month=" + this.currentYear + "-" + this.currentMonth).then((res) => {

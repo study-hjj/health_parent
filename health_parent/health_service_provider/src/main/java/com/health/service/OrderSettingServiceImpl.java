@@ -1,10 +1,13 @@
 package com.health.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.health.dao.OrderSettingDao;
 import com.health.entity.OrderSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.*;
 
 @Service(interfaceClass = OrderSettingService.class)
 @Transactional
@@ -27,5 +30,24 @@ public class OrderSettingServiceImpl implements OrderSettingService{
     @Override
     public void editNumberByOrderDate(OrderSetting orderSetting) {
         orderSettingDao.editByOrderDate(orderSetting);
+    }
+
+    @Override
+    public List<Map<String, Object>> getOrderSettingByMonth(String month) {
+        String start = month + "-1";//2023-3-1
+        String end = month + "-31";//2023-3-31
+        Map<String,String> map = new HashMap<>();
+        map.put("start",start);
+        map.put("end",end);
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<OrderSetting> orderSettings = orderSettingDao.getOrderSettingByMonth(map);
+        for (OrderSetting orderSetting : orderSettings){
+            Map<String, Object> data = new LinkedHashMap<>();
+            data.put("data",orderSetting.getOrderDate().getDate());
+            data.put("number",orderSetting.getNumber());
+            data.put("reservations",orderSetting.getReservations());
+            list.add(data);
+        }
+        return list;
     }
 }

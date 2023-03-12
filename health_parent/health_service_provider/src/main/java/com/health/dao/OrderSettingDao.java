@@ -4,6 +4,8 @@ import com.health.entity.OrderSetting;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public interface OrderSettingDao {
     Integer findByOrderDate(@Param("orderDate") Date orderDate);
@@ -11,4 +13,6 @@ public interface OrderSettingDao {
     void editByOrderDate(OrderSetting orderDate);
 
     void add(OrderSetting orderSetting);
+
+    List<OrderSetting> getOrderSettingByMonth(Map<String, String> map);
 }

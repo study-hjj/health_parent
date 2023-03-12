@@ -4,7 +4,6 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.health.constant.MessageConstant;
 import com.health.entity.OrderSetting;
 import com.health.service.OrderSettingService;
-import com.health.util.DateUtils;
 import com.health.util.POIUtils;
 import com.health.util.Result;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/ordersetting")
@@ -62,6 +62,16 @@ public class OrderSettingController {
         }catch (Exception e){
             e.printStackTrace();
             return new Result(false, MessageConstant.ORDERSETTING_FAIL);
+        }
+    }
+    @RequestMapping("/getOrderSettingByMonth")
+    public Result getOrderSettingByMonth(@RequestParam("month") String month){
+        try {
+            List<Map<String,Object>> orderSettings = orderSettingService.getOrderSettingByMonth(month);
+            return new Result(true,MessageConstant.ORDERSETTING_SUCCESS,orderSettings);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.ORDERSETTING_FAIL);
         }
     }
 }

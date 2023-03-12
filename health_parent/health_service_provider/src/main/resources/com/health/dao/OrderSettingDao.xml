@@ -13,4 +13,7 @@
     <select id="findByOrderDate" resultType="java.lang.Integer">
         select count(*) from t_ordersetting where orderDate = #{orderDate}
     </select>
+    <select id="getOrderSettingByMonth" parameterType="map" resultType="com.health.entity.OrderSetting">
+        select * from t_ordersetting where orderDate between #{start} and #{end}
+    </select>
 </mapper>
