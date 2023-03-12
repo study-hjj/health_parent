@@ -23,4 +23,9 @@ public class OrderSettingServiceImpl implements OrderSettingService{
         //如果没有，则将数据加入数据库
         orderSettingDao.add(orderSetting);
     }
+
+    @Override
+    public void editNumberByOrderDate(OrderSetting orderSetting) {
+        orderSettingDao.editByOrderDate(orderSetting);
+    }
 }
