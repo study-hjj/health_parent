@@ -262,7 +262,7 @@
                     ];
 
                     //发送ajax请求，根据年月查询对应的预约设置数据，赋值给leftobj对象，用于展示
-                    axios.get("/ordersetting/getOrderSettingByMonth.do?month=" + this.currentYear + "-" + this.currentMonth).then((res) => {
+                    axios.post("/ordersetting/getOrderSettingByMonth.do?month=" + this.currentYear + "-" + this.currentMonth).then((res) => {
                         if(res.data.flag){
                             this.leftobj = res.data.data;
                         }else{
