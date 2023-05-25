@@ -23,6 +23,10 @@
     <select id="findAll" resultType="com.health.entity.CheckItem">
         select * from t_checkitem;
     </select>
+    <!--根据所有的检查组查出检查项-->
+    <select id="findCheckItemsByCheckGroupId" parameterType="int" resultType="com.health.entity.CheckItem">
+        select * from t_checkitem where id in (select checkitem_id from t_checkgroup_checkitem where checkgroup_id = #{checkgroupId})
+    </select>
     <update id="edit" parameterType="com.health.entity.CheckItem">
       update t_checkitem
       <set>

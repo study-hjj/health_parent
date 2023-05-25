@@ -28,4 +28,6 @@ public interface SetmealDao {
     void deleteSetmealAndCheckGroup(@Param("setmeal_id") Integer id);
 
     List<Setmeal> findAll();
+
+    Setmeal findByIdDetail(Integer id);
 }

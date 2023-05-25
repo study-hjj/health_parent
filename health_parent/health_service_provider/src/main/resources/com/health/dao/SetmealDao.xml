@@ -14,6 +14,12 @@
         <result column="attention" property="attention"/>
         <result column="img" property="img"/>
     </resultMap>
+    <resultMap id="findSetmealDetailBySetmealId" type="com.health.entity.Setmeal" extends="baseResultMap">
+        <collection property="checkGroups" ofType="com.health.entity.CheckGroup"
+        column="id"
+        select="com.health.dao.CheckGroupDao.selectCheckGroupsBySetmealId">
+        </collection>
+    </resultMap>
     <insert id="add">
         <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
             select LAST_INSERT_ID()
@@ -87,5 +93,9 @@
     </select>
     <select id="findAll" resultType="com.health.entity.Setmeal">
         select * from t_setmeal
+    </select>
+    <!--根据套餐id查询套餐详情，包含（套餐基本信息、套餐关联的检查组、检查组关联的检查项）-->
+    <select id="findByIdDetail" parameterType="int" resultMap="findSetmealDetailBySetmealId">
+        select * from t_setmeal where id = #{id}
     </select>
 </mapper>

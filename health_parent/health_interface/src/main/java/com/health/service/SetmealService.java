@@ -21,4 +21,6 @@ public interface SetmealService {
     Integer[] findCheckgroupIdsBySetmealId(Integer id);
 
     List<Setmeal> findAll();
+
+    Setmeal findByIdDetail(Integer id);
 }
