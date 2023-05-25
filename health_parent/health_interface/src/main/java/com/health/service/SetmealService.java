@@ -5,6 +5,8 @@ import com.health.entity.Setmeal;
 import com.health.util.PageResult;
 import com.health.util.QueryPageBean;
 
+import java.util.List;
+
 public interface SetmealService {
     void add(Integer[] checkgroupIds, Setmeal setmeal);
 
@@ -17,4 +19,6 @@ public interface SetmealService {
     void delete(Integer id);
 
     Integer[] findCheckgroupIdsBySetmealId(Integer id);
+
+    List<Setmeal> findAll();
 }

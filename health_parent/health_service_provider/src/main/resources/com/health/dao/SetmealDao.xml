@@ -85,4 +85,7 @@
     <select id="findBySetmealId" resultType="java.lang.Integer">
         select count(*) from t_setmeal_checkgroup where setmeal_id = #{setmeal_id}
     </select>
+    <select id="findAll" resultType="com.health.entity.Setmeal">
+        select * from t_setmeal
+    </select>
 </mapper>

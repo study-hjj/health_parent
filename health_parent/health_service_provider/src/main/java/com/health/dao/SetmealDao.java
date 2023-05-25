@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.health.entity.Setmeal;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface SetmealDao {
     void add(Setmeal setmeal);
 
@@ -24,4 +26,6 @@ public interface SetmealDao {
     Integer findBySetmealId(@Param("setmeal_id") Integer id);
 
     void deleteSetmealAndCheckGroup(@Param("setmeal_id") Integer id);
+
+    List<Setmeal> findAll();
 }
