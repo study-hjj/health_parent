@@ -15,5 +15,9 @@
     <select id="findByTelephone" parameterType="string" resultType="com.health.entity.Member">
         select * from t_member where phoneNumber = #{phoneNumber}
     </select>
+    <!--根据日期统计会员数，统计指定日期之前的会员数-->
+    <select id="findMemberCountBeforeDate" resultType="java.lang.Integer">
+        select count(id) from t_member where regTime &lt;= #{value}
+    </select>
 
 </mapper>

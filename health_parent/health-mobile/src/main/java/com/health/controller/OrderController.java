@@ -60,7 +60,13 @@ public class OrderController {
         return result;
     }
 
-    //根据预约id查询预约信息
+    /**
+     * @Description: 根据预约查询id信息
+     * @author: hjj
+     * @date: 2023/6/3
+     * @param id
+     * @return: com.health.util.Result
+     */
     @RequestMapping("/findById")
     public Result findById(Integer id){
         try{

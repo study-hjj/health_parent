@@ -131,5 +131,6 @@
     <orderEntry type="library" name="Maven: org.bouncycastle:bctsp-jdk14:1.38" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk14:1.38" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcmail-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
   </component>
 </module>
